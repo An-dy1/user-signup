@@ -9,33 +9,42 @@
 </head>
 
 <body>
-
+<h1>Sign up here:</h1>
     <form method="POST">
+        <table>
+            <tr>
+                <td><label for="username">Username:</label></td>
+                <td>
+                    <input type="text" name="username" value="" />
+                    <p class="error">{{username_error}}</p>
+                </td>
+            </tr>
 
-        <label for="username">Username:
-            <input type="text" name="username" value="{{0}}" />
-        </label>
-        <p class="error">{{username_error}}</p>
+            <tr>
+                <td><label for="password">Password:</label></td>
+                <td>
+                    <input type="password" name="password" />
+                    <p class="error">{{password_error}}</p>
+                </td>
+            </tr>
 
-        <label for="password">Password:
-            <input type="password" name="password" value="{{1}}" />
-        </label>
-        <p class="error">{{password_error}}</p>
+            <tr>
+                <td><label for="verify_password">Verify password:</label></td>
+                <td>
+                    <input type="password" name="verify_password" />
+                    <p class="error">{{verify_password_error}}</p>
+                </td>
+            </tr>
 
-        <label for="verify_password">Verify password:
-            <input type="password" name="verify_password" value="{{2}}" />
-        </label>
-        <p class="error">{{verify_password_error}}</p>
-
-        <label for="email">Email (optional)
-            <input type="text" name="email" value="{{3}}" />
-        </label>
-        <p class="error">{{email_error}}</p>
-
+            <tr>
+                <td><label for="email">Email (optional)</label></td>
+                <td>  
+                    <input type="text" name="email" value="" />
+                    <p class="error">{{email_error}}</p>
+                </td>  
+            </tr>
+        </table>
         <input type="submit" value="Submit" />
-
     </form>
-
 </body>
-
 </html>
