@@ -35,17 +35,16 @@ def no_spaces(string):
     except: 
         return False
 
-# email criteria: BUT CAN BE LEFT BLANK single @, single . , contains no spaces, between 3 and 20 characters
 #check for one @ symbol
 def one_at(email):
     ats = []
 
     for char in email:
-        if char = "@":
+        if char is "@":
             ats += char
 
     try: 
-        len(ats) = 1
+        len(ats) == 1
         return True
     except:
         return False        
@@ -55,11 +54,11 @@ def one_dot(email):
     dots = []
 
     for char in email:
-        if char = "."
+        if char is ".":
             dots += char
 
     try:
-        len(dots) = 1
+        len(dots) == 1
         return True
     except:
         return False
@@ -71,8 +70,6 @@ def passwords_match(password, verify_password):
         return True #or something like this!
     except: 
         return False
-
-
 
 def is_username(username):
     try:
@@ -105,7 +102,7 @@ def is_email(email):
         except:
             return False
 
-@app.route("/" methods=["POST"])
+@app.route("/", methods=["POST"])
 def index():
 
     username = request.form.get("username")
@@ -122,38 +119,38 @@ def index():
         username_error = "That's not a valid username. Make sure it's between 3 and 20 characters and contains no special characters"
         username = ""
     else: 
-        username = username # is this right??
+        name = username # is this right??
 
     if not is_password(password):
         password_error = "That's not a valid password."
         password = ""
     else:
-        password = password #is this right?
+        password = str(password) #is this right?
 
     if not is_matching_password(verify_password, password):
         matching_password_error = "Passwords don't match."
         verify_password = ""
     else:
-        verify_password = verify_password #is this right?
+        verify_password = str(verify_password) #is this right?
 
     if not is_email(email):
         email_error = "That's not a valid email."
         email = ""
     else:
-        email = email #is this right?
+        email = str(email) #is this right?
 
     if not username_error and not password_error and not matching_password_error and not email_error:
         name = username
         return redirect("/welcome?name={0}".format(name)) #look carefully here
     else:
-        template = jinja_env.get_template("main-form.html")
-        return template.render(username_error=username_error,
+        return render_template(username_error=username_error,
         password_error=password_error,
         matching_password_error=matching_password_error,
         email_error=email_error)
 
-
 @app.route("/welcome")
 def welcome():
-    name = request.args.get("username")
-    return "<h1>Welcome, {0}!".format(name)
+    name = request.form["username"]
+    return "<h1>Welcome, {0}!</h1>".format(name)
+
+app.run()
