@@ -12,27 +12,81 @@ def display_user_signup():
 #functions needed to verify:
 
 # function to make sure something is input:
-if len(STRING) > 0 = True
+def something_input(string):
+    try:
+        len(string) > 0
+        return True
+    except:
+        return False
 
 # len() - length of a string between 3 and 20:
-if len(STRING) > 3 and len(STRING) < 20 = True
-
-# function to check no special characters
-sp_characters = [ !#$, %, &, '*+/=?^_`{|}~-] #eh maybe? not sure why green???
+def good_length(string):
+    try:
+        len(string) > 3 and len(string) < 20
+        return True
+    except:
+        return False
 
 #function to check no spaces:
-if " " in word: # or not in word
+def no_spaces(string):
+    try:
+        " " not in string
+        return True # or not in word
+    except: 
+        return False
 
-# email criteria: single @, single . , contains no spaces, between 3 and 20 characters
+# email criteria: BUT CAN BE LEFT BLANK single @, single . , contains no spaces, between 3 and 20 characters
+#check for one @ symbol
+def one_at(email):
+    ats = []
+
+    for char in email:
+        if char = "@":
+            ats += char
+
+    try: 
+        len(ats) = 1
+        return True
+    except:
+        return False        
+
+#check for one .
+def one_dot(email):
+    dots = []
+
+    for char in email:
+        if char = "."
+            dots += char
+
+    try:
+        len(dots) = 1
+        return True
+    except:
+        return False
 
 #passwords match:
-if password == verify_password is True #or something like this!
+def passwords_match(password, verify_password):
+    try:
+        password == verify_password
+        return True #or something like this!
+    except: 
+        return False
 
 
 
-def is_username(username): #username and password validations are the same, but how do I check several things in a try/except block?
+def is_username(username):
+    try:
+        something_input(username) and good_length(username) and no_spaces(username)
+        return True
+    except:
+        return False
     
 def is_password(password):
+    try:
+        something_input(password) and good_length(password) and no_spaces(password)
+        return True
+    except:
+        return False
 
 def is_matching_password(verify_password, password):
     try:
@@ -42,6 +96,14 @@ def is_matching_password(verify_password, password):
         return False
 
 def is_email(email):
+    if not something_input(email):
+        return True
+    else:
+        try:
+            no_spaces(email) and good_length(email) and one_dot(email) and one_at(email)
+            return True
+        except:
+            return False
 
 @app.route("/" methods=["POST"])
 def index():
@@ -56,7 +118,7 @@ def index():
     matching_password_error = ""
     email_error = ""
 
-    if not is_username(username):
+    if not something_input(username):
         username_error = "That's not a valid username. Make sure it's between 3 and 20 characters and contains no special characters"
         username = ""
     else: 
