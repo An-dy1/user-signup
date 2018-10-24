@@ -9,31 +9,27 @@ app.config['DEBUG'] = True
 def display_user_signup():
     return render_template("main-form.html")
 
-# function to make sure something is input:
 def something_input(string):
     try:
-        good_length == len(string) > 0
-        return good_length
+        good_input = len(string) > 0
+        return good_input
     except: 
         return False
 
-# len() - length of a string between 3 and 20:
 def good_length(string):
     try:
-        good_string == (len(string) > 3 and len(string) < 20)
+        good_string = (len(string) > 3 and len(string) < 20)
         return good_string
     except:
         return False
 
-#function to check no spaces:
 def no_spaces(string):
     try:
-        no_spaces == (" " not in string)
+        no_spaces = (" " not in string)
         return no_spaces
     except: 
         return False
 
-#check for one @ symbol
 def one_at(email):
     ats = []
 
@@ -42,12 +38,11 @@ def one_at(email):
             ats += char
 
     try: 
-        good_ats == (len(ats) is 1)
+        good_ats = (len(ats) == 1)
         return good_ats
     except:
         return False        
 
-#check for one .
 def one_dot(email):
     dots = []
 
@@ -56,28 +51,28 @@ def one_dot(email):
             dots += char
 
     try:
-        good_dots == (len(dots) is 1)
+        good_dots = (len(dots) == 1) 
         return good_dots
     except:
         return False
 
 def is_username(username):
     try:
-        good_username == something_input(username) and good_length(username) and no_spaces(username)
+        good_username = (something_input(username) and good_length(username) and no_spaces(username))
         return good_username
     except:
         return False
     
 def is_password(password):
     try:
-        good_password == something_input(password) and good_length(password) and no_spaces(password)
+        good_password = (something_input(password) and good_length(password) and no_spaces(password))
         return good_password
     except:
         return False
 
 def is_matching_password(verify_password, password):
     try:
-        verified_pw == (verify_password == password)
+        verified_pw = (verify_password == password)
         return verified_pw
     except:
         return False
@@ -87,7 +82,7 @@ def is_email(email):
         return True
     else:
         try:
-            good_email == (no_spaces(email) and good_length(email) and one_dot(email) and one_at(email))
+            good_email = (no_spaces(email) and good_length(email) and one_dot(email) and one_at(email))
             return good_email
         except:
             return False
@@ -121,7 +116,7 @@ def index():
         email_error = "That's not a valid email."
         email = ""
 
-    if not username_error and not password_error and not matching_password_error and not email_error:
+    if not username_error and not password_error and not verify_password_error and not email_error:
         name = username
         return redirect("/welcome?name={0}".format(name))
     else:
