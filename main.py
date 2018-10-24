@@ -115,33 +115,25 @@ def index():
     matching_password_error = ""
     email_error = ""
 
-    if not something_input(username):
+    if not is_username(username):
         username_error = "That's not a valid username. Make sure it's between 3 and 20 characters and contains no special characters"
         username = ""
-    else: 
-        name = username # is this right??
 
     if not is_password(password):
         password_error = "That's not a valid password."
         password = ""
-    else:
-        password = str(password) #is this right?
 
     if not is_matching_password(verify_password, password):
         matching_password_error = "Passwords don't match."
         verify_password = ""
-    else:
-        verify_password = str(verify_password) #is this right?
 
     if not is_email(email):
         email_error = "That's not a valid email."
         email = ""
-    else:
-        email = str(email) #is this right?
 
     if not username_error and not password_error and not matching_password_error and not email_error:
         name = username
-        return redirect("/welcome?name={0}".format(name)) #look carefully here
+        return redirect("/welcome?name={0}".format(name))
     else:
         return render_template(username_error=username_error,
         password_error=password_error,
@@ -150,7 +142,7 @@ def index():
 
 @app.route("/welcome")
 def welcome():
-    name = request.form["username"]
+    name = request.args.get("name")
     return "<h1>Welcome, {0}!</h1>".format(name)
 
 app.run()
