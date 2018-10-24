@@ -9,29 +9,27 @@ app.config['DEBUG'] = True
 def display_user_signup():
     return render_template("main-form.html")
 
-#functions needed to verify:
-
 # function to make sure something is input:
 def something_input(string):
     try:
-        len(string) > 0
-        return True
-    except:
+        good_length == len(string) > 0
+        return good_length
+    except: 
         return False
 
 # len() - length of a string between 3 and 20:
 def good_length(string):
     try:
-        len(string) > 3 and len(string) < 20
-        return True
+        good_string == (len(string) > 3 and len(string) < 20)
+        return good_string
     except:
         return False
 
 #function to check no spaces:
 def no_spaces(string):
     try:
-        " " not in string
-        return True # or not in word
+        no_spaces == (" " not in string)
+        return no_spaces
     except: 
         return False
 
@@ -44,8 +42,8 @@ def one_at(email):
             ats += char
 
     try: 
-        len(ats) == 1
-        return True
+        good_ats == (len(ats) is 1)
+        return good_ats
     except:
         return False        
 
@@ -58,38 +56,30 @@ def one_dot(email):
             dots += char
 
     try:
-        len(dots) == 1
-        return True
+        good_dots == (len(dots) is 1)
+        return good_dots
     except:
-        return False
-
-#passwords match:
-def passwords_match(password, verify_password):
-    try:
-        password == verify_password
-        return True #or something like this!
-    except: 
         return False
 
 def is_username(username):
     try:
-        something_input(username) and good_length(username) and no_spaces(username)
-        return True
+        good_username == something_input(username) and good_length(username) and no_spaces(username)
+        return good_username
     except:
         return False
     
 def is_password(password):
     try:
-        something_input(password) and good_length(password) and no_spaces(password)
-        return True
+        good_password == something_input(password) and good_length(password) and no_spaces(password)
+        return good_password
     except:
         return False
 
 def is_matching_password(verify_password, password):
     try:
-        verify_password == password
-        return True
-    except:         #need to name some sort of error here?
+        verified_pw == (verify_password == password)
+        return verified_pw
+    except:
         return False
 
 def is_email(email):
@@ -97,8 +87,8 @@ def is_email(email):
         return True
     else:
         try:
-            no_spaces(email) and good_length(email) and one_dot(email) and one_at(email)
-            return True
+            good_email == (no_spaces(email) and good_length(email) and one_dot(email) and one_at(email))
+            return good_email
         except:
             return False
 
@@ -112,11 +102,11 @@ def index():
 
     username_error = ""
     password_error = ""
-    matching_password_error = ""
+    verify_password_error = ""
     email_error = ""
 
     if not is_username(username):
-        username_error = "That's not a valid username. Make sure it's between 3 and 20 characters and contains no special characters"
+        username_error = "That's not a valid username."
         username = ""
 
     if not is_password(password):
@@ -124,7 +114,7 @@ def index():
         password = ""
 
     if not is_matching_password(verify_password, password):
-        matching_password_error = "Passwords don't match."
+        verify_password_error = "Passwords don't match."
         verify_password = ""
 
     if not is_email(email):
@@ -135,9 +125,9 @@ def index():
         name = username
         return redirect("/welcome?name={0}".format(name))
     else:
-        return render_template(username_error=username_error,
+        return render_template("main-form.html", username_error=username_error,
         password_error=password_error,
-        matching_password_error=matching_password_error,
+        verify_password_error=verify_password_error,
         email_error=email_error)
 
 @app.route("/welcome")

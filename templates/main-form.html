@@ -3,7 +3,30 @@
 <head>
     <style>
         .error {
-            color: #FF8B60
+            color: #FF8B60;
+        }
+        body {
+            color: #efdab9;
+            background-color: #393e44;
+            width: 100%;
+            font-family: 'Lato', sans-serif;
+            margin: 0 auto;
+        }
+        table {
+            margin-left: auto;
+            margin-right: auto;
+            border: 1px solid black; 
+        }
+        .td {
+            padding: 35px;
+        }
+        h1 {
+            text-align: center;
+            color: #fff;
+        }
+        .submit {
+            margin-left: auto;
+            margin-right: auto;
         }
     </style>
 </head>
@@ -14,37 +37,37 @@
             <table>
                 <tr>
                     <td><label for="username">Username:</label></td>
-                    <td>
-                        <input type="text" name="username" value="" />
-                        <p class="error">{{username_error}}</p>
-                    </td>
+                    <td><input type="text" name="username" value="" /></td>
+                    <td><p class="error">{{username_error}}</p></td>
                 </tr>
 
                 <tr>
                     <td><label for="password">Password:</label></td>
-                    <td>
-                        <input type="password" name="password" />
-                        <p class="error">{{password_error}}</p>
-                    </td>
+                    <td><input type="password" name="password" /></td>
+                    <td><p class="error">{{password_error}}</p></td>
                 </tr>
 
                 <tr>
                     <td><label for="verify_password">Verify password:</label></td>
-                    <td>
-                        <input type="password" name="verify_password" />
-                        <p class="error">{{verify_password_error}}</p>
-                    </td>
+                    <td><input type="password" name="verify_password" /></td>
+                    <td><p class="error">{{verify_password_error}}</p></td>
                 </tr>
 
                 <tr>
                     <td><label for="email">Email (optional)</label></td>
-                    <td>  
-                        <input type="text" name="email" value="" />
-                        <p class="error">{{email_error}}</p>
-                    </td>  
+                    <td><input type="text" name="email" value="" /></td>
+                    <td><p class="error">{{email_error}}</p></td>
+                </tr>
+
+                <tr>
+                    <td></td>
+                    <td>
+                        <input class="submit" type="submit" value="Submit" />
+                    </td>
+                    <td></td>
                 </tr>
             </table>
-            <input type="submit" value="Submit" />
+            
     </form>
 </body>
 </html>
